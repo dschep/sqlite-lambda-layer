@@ -2,16 +2,10 @@
 
 set -e
 
-rm -rf layer
-docker build -t geoip-lambda-layer .
-CONTAINER=$(docker run -d geoip-lambda-layer false)
-docker cp $CONTAINER:/opt layer
+rm -rf layer && mkdir -p layer/python
+docker build -t py36-sqlite-builder -f Dockerfile .
+CONTAINER=$(docker run -d py36-sqlite-builder false)
+docker cp \
+    $CONTAINER:/var/task/python/lib/python3.6/lib-dynload/_sqlite3.cpython-36m-x86_64-linux-gnu.so \
+    layer/python/.
 docker rm $CONTAINER
-touch layer/.slsignore
-cat > layer/.slsignore << EOF
-**/*.a
-**/*.la
-share/**
-include/**
-bin/**
-EOF

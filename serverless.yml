@@ -1,4 +1,4 @@
-service: geo-lambda-layer
+service: python-sqlite-layers
 
 provider:
   name: aws
@@ -7,6 +7,6 @@ plugins:
   - serverless-lambda-layers
 
 layers:
-  geoip:
+  sqlitePython36:
     buildScript: ./build.sh
     path: layer

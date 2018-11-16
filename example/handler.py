@@ -1,17 +1,9 @@
-import json
+import sqlite3
 
-import geoip2.database
+def hello(event, context):
+    con = sqlite3.connect(':memory:')
+    cur = con.cursor()
+    row = cur.execute("SELECT 'Hello from an in-memory SQLite DB!'").fetchone()
+    con.close()
 
-
-def geoip(event, context):
-    reader = geoip2.database.Reader("/opt/maxminddb/GeoLite2-City.mmdb")
-    response = reader.city(event["requestContext"]["identity"]["sourceIp"])
-    return {
-        "body": json.dumps(
-            {
-                "city": response.city.name,
-                "state": response.subdivisions.most_specific.name,
-                "country": response.country.name,
-            }
-        )
-    }
+    return row[0]
