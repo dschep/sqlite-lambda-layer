@@ -10,3 +10,5 @@ layers:
   sqlitePython36:
     buildScript: ./build.sh
     path: layer
+    allowedAccounts:
+      - '*'
