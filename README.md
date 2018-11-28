@@ -5,12 +5,12 @@ a [Lambda Layer](https://LAMBALAYERSLINK) that contains the necessary compiled l
 (`_sqlite3.so`).
 
 ## How to use
-See [this blogpost](https://serverless.com/blog/PATH) and
-[the example](https://github.com/serverless/sqlite-lambda-layer/tree/master/example)
-for how to use this layer
-with the [Serverless](https://serverless.com).
-
-The ARN for this layer is: `arn:aws:lambda:us-west-2:377024778620:layer:sqlitePython27:1`
-
-The fully qualified arn with the latest version is:
-`arn:aws:lambda:us-west-2:377024778620:layer:sqlitePython36:1`
+First you must clone the repo, build the file, and publish it to AWS:
+```shell
+git clone git@github.com:dschep/sqlite-lambda-layer
+cd sqlite-lambda-layer
+./build
+sls deploy
+```
+Then see [the docs](https://serverless.com/framework/docs/providers/aws/guide/functions/#layers)
+and configure your lambda to use the layer you just published.
